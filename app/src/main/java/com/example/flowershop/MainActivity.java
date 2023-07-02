@@ -1,11 +1,9 @@
 package com.example.flowershop;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,30 +14,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        loadFragment(new HomeFragment());
         bottomNavigationView = findViewById(R.id.bottonnav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        loadFragment(new Home_Fragment());
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                loadFragment(new HomeFragment());
+            } else if (item.getItemId() == R.id.cart) {
+                loadFragment(new CartFragment());
+            } else if (item.getItemId() == R.id.profile) {
+                loadFragment(new ProfileFragment());
+            }
+            return true;
+        });
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-        int itemId = item.getItemId();
-        if (itemId == R.id.home) {
-            fragment = new Home_Fragment();
-        } else if (itemId == R.id.cart) {
-            fragment = new Home_Fragment();
-        } else if (itemId == R.id.profile) {
-            fragment = new Home_Fragment();
-        }
-        if (fragment != null) {
-            loadFragment((Home_Fragment) fragment);
-        }
-        return true;
-    }
-
-    private void loadFragment(Home_Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayout, fragment).commit();
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.navBody, fragment).commit();
     }
 }
