@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">FlowerShop</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in_help">New to our app? <b>Create one</b></string>
+    <string name="sign_up_help">Already have an account? <b>Sign in</b></string>
+    <string name="sign_in_title"><b>SIGN IN</b></string>
+    <string name="sign_up_title"><b>SIGN UP</b></string>
+    <string name="login_username_field">Username</string>
+    <string name="login_password_field">Password</string>
+    <string name="signup_username_field">Username</string>
+    <string name="signup_password_field">Password</string>
+    <string name="signup_confirm_field">Password</string>
+    <string name="back_to_home_page"><b>BACK TO HOME PAGE</b></string>
 </resources>

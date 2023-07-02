@@ -1,14 +1,20 @@
-package com.example.flowershop;
+package com.example.flowershop.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.flowershop.R;
+import com.example.flowershop.account.LoginActivity;
+import com.example.flowershop.account.SignupActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    //    TODO: This boolean is for testing screen purpose
+    boolean loggedIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.cart) {
                 loadFragment(new CartFragment());
             } else if (item.getItemId() == R.id.profile) {
-                loadFragment(new ProfileFragment());
+                if (loggedIn) {
+                    loadFragment(new ProfileFragment());
+                } else {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
             return true;
         });
