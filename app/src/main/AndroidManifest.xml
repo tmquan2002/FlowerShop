@@ -13,10 +13,10 @@
         android:theme="@style/Theme.FlowerShop"
         tools:targetApi="31">
         <activity
-            android:name=".account.SignupActivity"
+            android:name=".activity.account.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".account.LoginActivity"
+            android:name=".activity.account.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".main.MainActivity"

@@ -10,7 +10,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.flowershop.R;
-import com.example.flowershop.account.LoginActivity;
+import com.example.flowershop.activity.account.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

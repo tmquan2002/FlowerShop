@@ -1,4 +1,4 @@
-package com.example.flowershop.account;
+package com.example.flowershop.activity.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,23 +10,23 @@ import android.widget.TextView;
 import com.example.flowershop.R;
 import com.example.flowershop.main.MainActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
 
-        TextView toSignUp = findViewById(R.id.toSignUp);
+        TextView toSignIn = findViewById(R.id.toSignIn);
         Button back = findViewById(R.id.btnBack);
 
-        toSignUp.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+        toSignIn.setOnClickListener(v -> {
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
             startActivity(intent);
         });
     }
