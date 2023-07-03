@@ -5,11 +5,13 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
 @Builder
 @Getter
 @Setter
