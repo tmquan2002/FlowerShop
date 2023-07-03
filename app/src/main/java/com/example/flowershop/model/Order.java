@@ -5,7 +5,14 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Builder
+@Getter
+@Setter
 public class Order {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
