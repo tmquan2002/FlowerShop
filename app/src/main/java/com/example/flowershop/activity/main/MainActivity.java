@@ -1,4 +1,4 @@
-package com.example.flowershop.main;
+package com.example.flowershop.activity.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.flowershop.R;
 import com.example.flowershop.activity.account.LoginActivity;
+import com.example.flowershop.main.CartFragment;
+import com.example.flowershop.main.HomeFragment;
+import com.example.flowershop.main.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.flowershop.R;
-import com.example.flowershop.main.MainActivity;
+import com.example.flowershop.activity.main.MainActivity;
 
 public class SignupActivity extends AppCompatActivity {
 
