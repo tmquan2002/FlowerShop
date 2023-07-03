@@ -1,4 +1,4 @@
-package com.example.flowershop.main;
+package com.example.flowershop.activity.main;
 
 import android.os.Bundle;
 
