@@ -16,6 +16,6 @@ public class Flower {
     private Integer id;
     private String name;
     private String description;
-    private int amount;
-    private double price;
+    private Integer amount;
+    private Double price;
 }

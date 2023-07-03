@@ -13,5 +13,6 @@ import lombok.Setter;
 public class OrderDetails {
     private Integer orderId;
     private Integer flowerId;
+    private Double price;
     private Integer amount;
 }
