@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         rv = view.findViewById(R.id.list);
-        FlowerAdapter adapter = new FlowerAdapter(list, context);
+        FlowerAdapter adapter = new FlowerAdapter(list);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(context));
         return view;
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onMenuItemActionCollapse(@NonNull MenuItem item) {
-                FlowerAdapter adapter = new FlowerAdapter(list, context);
+                FlowerAdapter adapter = new FlowerAdapter(list);
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(context));
                 return true;
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query == null || query.trim().isEmpty()) {
-                    FlowerAdapter adapter = new FlowerAdapter(list, context);
+                    FlowerAdapter adapter = new FlowerAdapter(list);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(context));
                 } else {
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
                             filteredList.add(flower);
                         }
                     }
-                    FlowerAdapter adapter = new FlowerAdapter(filteredList, context);
+                    FlowerAdapter adapter = new FlowerAdapter(filteredList);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(context));
                 }
@@ -109,4 +109,5 @@ public class HomeFragment extends Fragment {
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 }
