@@ -4,22 +4,28 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.main.DetailFragment;
 import com.example.flowershop.model.Flower;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder> {
-    private final ArrayList<Flower> list;
+    private List<Flower> list = Collections.emptyList();
+    Context context;
 
-    public FlowerAdapter(ArrayList<Flower> list) {
+    public FlowerAdapter(List<Flower> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @NonNull
@@ -38,11 +44,13 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
         Flower flower = list.get(position);
         holder.itemName.setText(flower.getName());
         holder.itemDescription.setText(flower.getDescription());
-        holder.itemView.setOnClickListener(v -> {
-            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            DetailFragment detailFragment = DetailFragment.newInstance(flower);
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
-        });
+        holder.price.setText(String.format("%s VND", flower.getPrice()));
+        Glide.with(context).load(flower.getImageUrl()).into(holder.imageView);
+                holder.itemView.setOnClickListener(v -> {
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    DetailFragment detailFragment = DetailFragment.newInstance(flower);
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
+                });
     }
 
     @Override
@@ -53,12 +61,15 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
         TextView itemDescription;
+        TextView price;
+        ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            price = itemView.findViewById(R.id.price);
             itemName = itemView.findViewById(R.id.itemName);
             itemDescription = itemView.findViewById(R.id.itemDescription);
+            imageView = itemView.findViewById(R.id.itemImage);
         }
     }
 }

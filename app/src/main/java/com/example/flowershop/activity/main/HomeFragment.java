@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,14 +17,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.adapter.FlowerAdapter;
 import com.example.flowershop.model.Flower;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment {
-    ArrayList<Flower> list;
+    private final CompositeDisposable mDisposable = new CompositeDisposable();
+    List<Flower> list;
     private RecyclerView rv;
     private Context context;
 
@@ -36,18 +44,6 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         context = getActivity();
-        populateList();
-    }
-
-    private void populateList() {
-        list = new ArrayList<>();
-        list.add(new Flower(1, "Alvin", "Description", 12, 23.3));
-        list.add(new Flower(2, "Banana", "Description 2", 1, 2.3));
-        list.add(new Flower(3, "Cut", "Description 3", 2, 3.3));
-        list.add(new Flower(4, "Dice", "Description 4", 24, 2.3));
-        list.add(new Flower(5, "Egg", "Description 5", 3, 23.1));
-        list.add(new Flower(6, "Quan", "Description 5", 3, 23.1));
-        list.add(new Flower(6, "Vines", "Description 5", 3, 23.1));
     }
 
     @Override
@@ -55,9 +51,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         rv = view.findViewById(R.id.list);
-        FlowerAdapter adapter = new FlowerAdapter(list);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(context));
+        getFlower();
         return view;
     }
 
@@ -72,7 +66,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onMenuItemActionCollapse(@NonNull MenuItem item) {
-                FlowerAdapter adapter = new FlowerAdapter(list);
+                FlowerAdapter adapter = new FlowerAdapter(list, context);
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(context));
                 return true;
@@ -84,17 +78,17 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query == null || query.trim().isEmpty()) {
-                    FlowerAdapter adapter = new FlowerAdapter(list);
+                    FlowerAdapter adapter = new FlowerAdapter(list, context);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(context));
                 } else {
-                    ArrayList<Flower> filteredList = new ArrayList<>();
+                    List<Flower> filteredList = new ArrayList<>();
                     for (Flower flower : list) {
                         if (flower.getName().toLowerCase().contains(query.toLowerCase())) {
                             filteredList.add(flower);
                         }
                     }
-                    FlowerAdapter adapter = new FlowerAdapter(filteredList);
+                    FlowerAdapter adapter = new FlowerAdapter(filteredList, context);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(context));
                 }
@@ -110,4 +104,19 @@ public class HomeFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    private void getFlower() {
+        // Subscribe to updating the user name.
+        // Re-enable the button once the user name has been updated
+        mDisposable.add(FlowerDatabase.getInstance(context).flowerDao().getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((flowerList) -> {
+                            list = flowerList;
+                            FlowerAdapter adapter = new FlowerAdapter(list, context);
+                            rv.setAdapter(adapter);
+                            rv.setLayoutManager(new LinearLayoutManager(context));
+                        },
+                        throwable -> Log.e("GetFailed", "getFlower: Cannot get the list", throwable)));
+
+    }
 }

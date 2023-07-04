@@ -1,14 +1,13 @@
 package com.example.flowershop.activity.account;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.flowershop.R;
-import com.example.flowershop.activity.main.MainActivity;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -18,16 +17,13 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         TextView toSignIn = findViewById(R.id.toSignIn);
-        Button back = findViewById(R.id.btnBack);
+        Button back = findViewById(R.id.backBtn);
 
         toSignIn.setOnClickListener(v -> {
             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
-        back.setOnClickListener(v -> {
-            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-            startActivity(intent);
-        });
+        back.setOnClickListener(v -> finish());
     }
 }

@@ -4,24 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg"
     tools:context=".activity.account.SignupActivity">
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Back"
+        app:icon="@drawable/baseline_arrow_back_ios_new_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="136dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="@string/sign_up_title"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="363dp"
+        android:layout_width="350dp"
         android:layout_height="52dp"
         android:layout_marginTop="32dp"
         android:ems="10"
@@ -34,7 +44,7 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="363dp"
+        android:layout_width="350dp"
         android:layout_height="52dp"
         android:layout_marginTop="32dp"
         android:ems="10"
@@ -47,7 +57,7 @@
 
     <EditText
         android:id="@+id/etConfirmPassword"
-        android:layout_width="363dp"
+        android:layout_width="350dp"
         android:layout_height="52dp"
         android:layout_marginTop="32dp"
         android:ems="10"
@@ -61,7 +71,7 @@
     <TextView
         android:id="@+id/toSignIn"
         android:layout_width="262dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/sign_up_help"
         android:textAlignment="center"
@@ -70,34 +80,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etConfirmPassword" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="---Or---"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toSignIn" />
-
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/sign_up_title"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/back_to_home_page"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/toSignIn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

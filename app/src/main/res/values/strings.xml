@@ -8,7 +8,7 @@
     <string name="login_password_field">Password</string>
     <string name="signup_username_field">Username</string>
     <string name="signup_password_field">Password</string>
-    <string name="signup_confirm_field">Password</string>
+    <string name="signup_confirm_field">Confirm Password</string>
     <string name="back_to_home_page"><b>BACK TO HOME PAGE</b></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
