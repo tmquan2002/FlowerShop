@@ -2,13 +2,17 @@ package com.example.flowershop.activity.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.account.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -37,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        FlowerDatabase.getInstance(this)
+                .flowerDao()
+                .getAll()
+                .subscribeOn(Schedulers.io())
+                .subscribe(flowers -> Log.i("FLOWERS", flowers.toString()));
     }
 
     private void loadFragment(Fragment fragment) {
