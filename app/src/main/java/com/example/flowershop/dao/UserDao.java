@@ -27,12 +27,8 @@ public abstract class UserDao {
     public Single<Long> register(@NonNull User user) {
         user.setRole(UserRole.USER);
         return getByUsername(user.getUsername())
-                .flatMap(u -> {
-                    Log.i("UserDao", "FLAT MAP");
-                    return Single.<Long>error(new UserAlreadyExistException());
-                })
+                .flatMap(u -> Single.<Long>error(new UserAlreadyExistException()))
                 .onErrorResumeNext(e -> {
-                    Log.e("UserDao", e.getMessage(), e);
                     if (e instanceof UserAlreadyExistException) {
                         return Single.error(e);
                     }
