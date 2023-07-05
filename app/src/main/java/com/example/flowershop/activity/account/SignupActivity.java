@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.flowershop.R;
+import com.example.flowershop.activity.main.MainActivity;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -24,6 +25,10 @@ public class SignupActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        back.setOnClickListener(v -> finish());
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
     }
 }

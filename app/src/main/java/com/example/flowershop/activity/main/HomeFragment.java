@@ -117,6 +117,5 @@ public class HomeFragment extends Fragment {
                             rv.setLayoutManager(new LinearLayoutManager(context));
                         },
                         throwable -> Log.e("GetFailed", "getFlower: Cannot get the list", throwable)));
-
     }
 }
