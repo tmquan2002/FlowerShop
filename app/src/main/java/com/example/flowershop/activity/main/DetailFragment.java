@@ -1,39 +1,35 @@
 package com.example.flowershop.activity.main;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.flowershop.R;
 import com.example.flowershop.model.Flower;
 
 public class DetailFragment extends Fragment {
-    int amountValue = 0;
+    int currentAmountChoose = 0;
+    static Flower currentFlower;
 
     public DetailFragment() {
         // Required empty public constructor
     }
 
     public static DetailFragment newInstance(Flower flower) {
-        DetailFragment detailFragment = new DetailFragment();
-        Bundle args = new Bundle();
-        args.putString("Name", flower.getName());
-        args.putString("Description", flower.getDescription());
-        args.putInt("Amount", flower.getAmount());
-        args.putDouble("Price", flower.getPrice());
-        args.putString("Image", flower.getImageUrl());
-        detailFragment.setArguments(args);
-        return detailFragment;
+        //Get flower details from item and add hto args bundle
+        currentFlower = flower;
+        return new DetailFragment();
     }
 
     @Override
@@ -48,6 +44,25 @@ public class DetailFragment extends Fragment {
         TextView total = view.findViewById(R.id.total);
         ImageView imageView = view.findViewById(R.id.flower_image);
         EditText amountChoose = view.findViewById(R.id.choose_amount);
+
+        Button plus = view.findViewById(R.id.plus);
+        Button minus = view.findViewById(R.id.minus);
+        Button addToCart = view.findViewById(R.id.btnAddToCart);
+
+        //On Click plus and minus
+        plus.setOnClickListener(v -> {
+            if (currentAmountChoose < currentFlower.getAmount()) {
+                currentAmountChoose = currentAmountChoose + 1;
+                amountChoose.setText(String.valueOf(currentAmountChoose));
+            }
+        });
+        minus.setOnClickListener(v -> {
+            if (currentAmountChoose > 0) {
+                currentAmountChoose = currentAmountChoose - 1;
+                amountChoose.setText(String.valueOf(currentAmountChoose));
+            }
+        });
+
         //On Edit Text Change
         amountChoose.addTextChangedListener(new TextWatcher() {
             @Override
@@ -58,12 +73,12 @@ public class DetailFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    amountValue = Integer.parseInt(s.toString());
+                    currentAmountChoose = Integer.parseInt(s.toString());
                 } catch (NumberFormatException ex) {
-                    amountValue = 0;
+                    currentAmountChoose = 0;
                 }
-                if (getArguments() != null) {
-                    total.setText(String.format("%s VND", getArguments().getDouble("Price") * amountValue));
+                if (currentFlower != null) {
+                    total.setText(String.format("%s VND", currentFlower.getPrice() * currentAmountChoose));
                 }
             }
 
@@ -72,14 +87,29 @@ public class DetailFragment extends Fragment {
 
             }
         });
+        if (currentAmountChoose > currentFlower.getAmount()) {
+            addToCart.setEnabled(false);
+        }
+        //Button AddToCart
+        addToCart.setOnClickListener(v -> {
+            if (currentAmountChoose > currentFlower.getAmount()) {
+                Toast.makeText(getActivity(), "Not enough product", Toast.LENGTH_LONG).show();
+            } else if (currentAmountChoose == 0) {
+                Toast.makeText(getActivity(), "Empty amount chosen", Toast.LENGTH_LONG).show();
+            } else {
+                // TODO: Add to Cart function needed
+                Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show();
+            }
+        });
 
-        if (getArguments() != null) {
-            name.setText(getArguments().getString("Name"));
-            description.setText(getArguments().getString("Description"));
-            amount.setText(String.format("Amount: %s", getArguments().getInt("Amount")));
-            price.setText(String.format("%s VND", getArguments().getDouble("Price")));
-            Glide.with(this).load(getArguments().getString("Image")).into(imageView);
-            total.setText(String.format("%s VND", getArguments().getDouble("Price") * amountValue));
+        //Get flower details and set to text view
+        if (currentFlower != null) {
+            name.setText(currentFlower.getName());
+            description.setText(currentFlower.getDescription());
+            amount.setText(String.format("Amount: %s", currentFlower.getAmount()));
+            price.setText(String.format("%s VND", currentFlower.getPrice()));
+            Glide.with(this).load(currentFlower.getImageUrl()).into(imageView);
+            total.setText(String.format("%s VND", currentFlower.getPrice() * currentAmountChoose));
         }
         return view;
     }
