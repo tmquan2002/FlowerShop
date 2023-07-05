@@ -105,8 +105,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void getFlower() {
-        // Subscribe to updating the user name.
-        // Re-enable the button once the user name has been updated
         mDisposable.add(FlowerDatabase.getInstance(context).flowerDao().getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -117,5 +115,13 @@ public class HomeFragment extends Fragment {
                             rv.setLayoutManager(new LinearLayoutManager(context));
                         },
                         throwable -> Log.e("GetFailed", "getFlower: Cannot get the list", throwable)));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // clear all the subscriptions
+        mDisposable.clear();
     }
 }

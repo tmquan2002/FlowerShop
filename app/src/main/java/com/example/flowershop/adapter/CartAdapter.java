@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.main.DetailFragment;
-import com.example.flowershop.model.Flower;
+import com.example.flowershop.model.relation.CartAndFlower;
 
 import java.util.Collections;
 import java.util.List;
 
-public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     Context context;
-    private List<Flower> list = Collections.emptyList();
+    private List<CartAndFlower> list = Collections.emptyList();
 
-    public FlowerAdapter(List<Flower> list, Context context) {
+    public CartAdapter(List<CartAndFlower> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -34,22 +35,20 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.flower_items, parent, false);
+        View view = layoutInflater.inflate(R.layout.cart_items, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Flower flower = list.get(position);
-        holder.itemName.setText(flower.getName());
-        holder.itemDescription.setText(flower.getDescription());
-        holder.price.setText(String.format("%s VND", flower.getPrice()));
-        Glide.with(context).load(flower.getImageUrl()).into(holder.imageView);
-        //TODO: Add edit and delete function
-        holder.itemView.setOnClickListener(v -> {
+        CartAndFlower cartAndFlower = list.get(position);
+        holder.itemName.setText(cartAndFlower.getFlower().getName());
+        holder.itemAmount.setText(String.format("Amount: %s", cartAndFlower.getCart().getAmount()));
+        Glide.with(context).load(cartAndFlower.getFlower().getImageUrl()).into(holder.imageView);
+        holder.middleLinear.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            DetailFragment detailFragment = DetailFragment.newInstance(flower);
+            DetailFragment detailFragment = DetailFragment.newInstance(cartAndFlower.getFlower());
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
         });
     }
@@ -60,17 +59,18 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName;
-        TextView itemDescription;
-        TextView price;
-        ImageView imageView;
+        TextView itemName, itemAmount;
+        ImageView imageView, edit, delete;
+        LinearLayout middleLinear;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            price = itemView.findViewById(R.id.price);
             itemName = itemView.findViewById(R.id.itemName);
-            itemDescription = itemView.findViewById(R.id.itemAmount);
+            itemAmount = itemView.findViewById(R.id.itemAmount);
             imageView = itemView.findViewById(R.id.itemImage);
+            edit = itemView.findViewById(R.id.edit);
+            delete = itemView.findViewById(R.id.delete);
+            middleLinear = itemView.findViewById(R.id.middleLinear);
         }
     }
 }

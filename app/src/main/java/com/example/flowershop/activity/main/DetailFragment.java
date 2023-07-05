@@ -1,8 +1,10 @@
 package com.example.flowershop.activity.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +14,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
+import com.example.flowershop.model.Cart;
 import com.example.flowershop.model.Flower;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class DetailFragment extends Fragment {
-    int currentAmountChoose = 0;
     static Flower currentFlower;
+    private final CompositeDisposable mDisposable = new CompositeDisposable();
+    int currentAmountChoose = 0;
+    Context context;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -30,6 +41,12 @@ public class DetailFragment extends Fragment {
         //Get flower details from item and add hto args bundle
         currentFlower = flower;
         return new DetailFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = getActivity();
     }
 
     @Override
@@ -47,7 +64,7 @@ public class DetailFragment extends Fragment {
 
         Button plus = view.findViewById(R.id.plus);
         Button minus = view.findViewById(R.id.minus);
-        Button addToCart = view.findViewById(R.id.btnAddToCart);
+        Button addToCart = view.findViewById(R.id.btnOrder);
 
         //On Click plus and minus
         plus.setOnClickListener(v -> {
@@ -97,7 +114,7 @@ public class DetailFragment extends Fragment {
             } else if (currentAmountChoose == 0) {
                 Toast.makeText(getActivity(), "Empty amount chosen", Toast.LENGTH_LONG).show();
             } else {
-                // TODO: Add to Cart function needed
+                addToCart();
                 Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show();
             }
         });
@@ -112,5 +129,15 @@ public class DetailFragment extends Fragment {
             total.setText(String.format("%s VND", currentFlower.getPrice() * currentAmountChoose));
         }
         return view;
+    }
+
+    private void addToCart() {
+        // TODO: Replace userId with loggedIn user
+        Cart cart = new Cart(2, currentFlower.getId(), currentAmountChoose);
+        mDisposable.add(FlowerDatabase.getInstance(context).cartDao().add(cart)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show(),
+                        throwable -> Log.e("GetFailed", "getFlower: Cannot get the list", throwable)));
     }
 }

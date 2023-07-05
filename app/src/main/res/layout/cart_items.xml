@@ -14,14 +14,15 @@
 
     <ImageView
         android:id="@+id/itemImage"
-        android:layout_width="40dp"
+        android:layout_width="75dp"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
         android:layout_weight="1"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/flower_foreground" />
 
     <LinearLayout
-        android:layout_width="148dp"
+        android:id="@+id/middleLinear"
+        android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:elevation="20dp"
@@ -35,7 +36,7 @@
             android:padding="3dp"
             android:text="Name"
             android:textColor="#000"
-            android:textSize="20dp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView
@@ -43,21 +44,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="Description"
+            android:text="Amount"
             android:textAlignment="gravity"
             android:textColor="#7F7F7F"
-            android:textSize="10sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="95dp"
+    <LinearLayout
+        android:layout_width="60dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="500 VND"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.flowershop.R;
 import com.example.flowershop.activity.account.LoginActivity;
+import com.example.flowershop.activity.admin.UserListChatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     //    TODO: This boolean is for testing screen purpose
-    boolean loggedIn = false;
+    boolean loggedIn = true;
+    String role = "ADMIN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.cart) {
                 loadFragment(new CartFragment());
             } else if (item.getItemId() == R.id.profile) {
-                if (loggedIn) {
+                if (!loggedIn) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else if (role.equals("USER")) {
                     loadFragment(new ProfileFragment());
                 } else {
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(MainActivity.this, UserListChatActivity.class);
                     startActivity(intent);
                 }
             }
