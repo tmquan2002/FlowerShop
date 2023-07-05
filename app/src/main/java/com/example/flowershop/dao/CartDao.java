@@ -29,4 +29,7 @@ public interface CartDao {
 
     @Delete
     Completable delete(Cart cart);
+
+    @Query("DELETE FROM cart WHERE userId = :userId")
+    Completable deleteByUserId(int userId);
 }

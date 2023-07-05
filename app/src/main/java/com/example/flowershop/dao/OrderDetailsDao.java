@@ -20,5 +20,5 @@ public interface OrderDetailsDao {
     Single<List<OrderDetailsAndFlower>> getByOrderId(int orderId);
 
     @Insert
-    Completable add(OrderDetails orderDetails);
+    Completable add(List<OrderDetails> orderDetailsList);
 }
