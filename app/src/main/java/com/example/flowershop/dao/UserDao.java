@@ -1,11 +1,10 @@
 package com.example.flowershop.dao;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.rxjava3.EmptyResultSetException;
 
 import com.example.flowershop.exception.UserAlreadyExistException;
 import com.example.flowershop.model.User;
@@ -29,10 +28,10 @@ public abstract class UserDao {
         return getByUsername(user.getUsername())
                 .flatMap(u -> Single.<Long>error(new UserAlreadyExistException()))
                 .onErrorResumeNext(e -> {
-                    if (e instanceof UserAlreadyExistException) {
-                        return Single.error(e);
+                    if (e instanceof EmptyResultSetException) {
+                        return add(user);
                     }
-                    return add(user);
+                    return Single.error(e);
                 });
     }
 }
