@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.main.MainActivity;
+import com.example.flowershop.util.UserHelper;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -46,12 +47,16 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        signIn.setOnClickListener(v -> mDisposable.add(FlowerDatabase.getInstance(LoginActivity.this).userDao().getByUsernameAndPassword(username.getText().toString(), password.getText().toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe((user) -> {
-            //TODO: Authenticate here
-            Toast.makeText(LoginActivity.this, user.getUsername(), Toast.LENGTH_LONG).show();
-        }, throwable -> {
-            Log.e("GetFailed", "getUser: Cannot get the user", throwable);
-            Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
-        })));
+        signIn.setOnClickListener(v -> mDisposable.add(FlowerDatabase
+                .getInstance(LoginActivity.this).userDao().getByUsernameAndPassword(username.getText().toString(), password.getText().toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((user) -> {
+                    UserHelper.setAuthUser(user);
+                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
+                }, throwable -> {
+                    Log.e("GetFailed", "getUser: Cannot get the user", throwable);
+                    Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
+                })));
     }
 }

@@ -68,8 +68,8 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             price = itemView.findViewById(R.id.price);
-            itemName = itemView.findViewById(R.id.itemName);
-            itemDescription = itemView.findViewById(R.id.itemAmount);
+            itemName = itemView.findViewById(R.id.itemAddress);
+            itemDescription = itemView.findViewById(R.id.itemPhone);
             imageView = itemView.findViewById(R.id.itemImage);
         }
     }

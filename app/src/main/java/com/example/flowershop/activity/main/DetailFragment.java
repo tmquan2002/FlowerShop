@@ -22,6 +22,7 @@ import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.model.Cart;
 import com.example.flowershop.model.Flower;
+import com.example.flowershop.util.UserHelper;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -104,15 +105,15 @@ public class DetailFragment extends Fragment {
 
             }
         });
-        if (currentAmountChoose > currentFlower.getAmount()) {
-            addToCart.setEnabled(false);
-        }
         //Button AddToCart
         addToCart.setOnClickListener(v -> {
             if (currentAmountChoose > currentFlower.getAmount()) {
-                Toast.makeText(getActivity(), "Not enough product", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Shop doesn't have enough product", Toast.LENGTH_LONG).show();
             } else if (currentAmountChoose == 0) {
                 Toast.makeText(getActivity(), "Empty amount chosen", Toast.LENGTH_LONG).show();
+            } else if (UserHelper.getAuthUser() == null) {
+                addToCart.setEnabled(false);
+                Toast.makeText(getActivity(), "Please login first", Toast.LENGTH_LONG).show();
             } else {
                 addToCart();
                 Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show();
@@ -132,8 +133,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void addToCart() {
-        // TODO: Replace userId with loggedIn user
-        Cart cart = new Cart(2, currentFlower.getId(), currentAmountChoose);
+        Cart cart = new Cart(UserHelper.getAuthUser().getId(), currentFlower.getId(), currentAmountChoose);
         mDisposable.add(FlowerDatabase.getInstance(context).cartDao().add(cart)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

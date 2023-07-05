@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -21,7 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.adapter.CartAdapter;
+import com.example.flowershop.model.Order;
 import com.example.flowershop.model.relation.CartAndFlower;
+import com.example.flowershop.util.UserHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,6 @@ public class CartFragment extends Fragment {
     private RecyclerView rv;
     private Context context;
     private TextView cartTotal;
-
 
     public CartFragment() {
         // Required empty public constructor
@@ -60,7 +62,8 @@ public class CartFragment extends Fragment {
         Button btnOrder = view.findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(v -> {
             //TODO: Open dialog to add user shipping info
-            //TODO: After that call order() function
+            order(UserHelper.getAuthUser().getId());
+            //TODO: Navigate to order detail to show what user has ordered
         });
         getCart();
         return view;
@@ -116,8 +119,7 @@ public class CartFragment extends Fragment {
     }
 
     private void getCart() {
-        // TODO: Replace userId with loggedIn user
-        mDisposable.add(FlowerDatabase.getInstance(context).cartDao().getByUserId(2)
+        mDisposable.add(FlowerDatabase.getInstance(context).cartDao().getByUserId(UserHelper.getAuthUser().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((cartAndFlowerList) -> {
@@ -136,14 +138,14 @@ public class CartFragment extends Fragment {
                         throwable -> Log.e("GetFailed", "getCart: Cannot get the list", throwable)));
     }
 
-    private void order() {
-//        OrderStatus orderStatus = new OrderStatus()
-//        Order order = new Order(2,2,"","","",new Date(),new Date());
-//        mDisposable.add(FlowerDatabase.getInstance(context).orderDao().createOrder()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(() -> Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show(),
-//                        throwable -> Log.e("GetFailed", "getFlower: Cannot get the list", throwable)));
+    private void order(int userID) {
+        //TODO: Replace with dialog info
+        Order order = Order.builder().phone("09992").address("2231/213").userId(userID).build();
+        mDisposable.add(FlowerDatabase.getInstance(context).orderDao().createOrder(order)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((orderId) -> Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show(),
+                        throwable -> Log.e("GetFailed", "createOrder: Cannot add order", throwable)));
     }
 
     @Override
