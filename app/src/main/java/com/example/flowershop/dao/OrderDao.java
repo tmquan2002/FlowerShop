@@ -7,6 +7,7 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.flowershop.FlowerDatabase;
+import com.example.flowershop.model.Flower;
 import com.example.flowershop.model.Order;
 import com.example.flowershop.model.OrderDetails;
 import com.example.flowershop.model.OrderStatus;
@@ -25,10 +26,12 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public abstract class OrderDao {
     private final OrderDetailsDao orderDetailsDao;
     private final CartDao cartDao;
+    private final FlowerDao flowerDao;
 
     public OrderDao(FlowerDatabase db) {
         orderDetailsDao = db.orderDetailsDao();
         cartDao = db.cartDao();
+        flowerDao = db.flowerDao();
     }
 
     @Query("SELECT * FROM `order` WHERE userId = :userId")
@@ -57,12 +60,24 @@ public abstract class OrderDao {
 
         int orderId = (int) add(order).blockingGet().longValue();
         if (orderId > 0) {
-            Completable odAddObs = cartDao.getByUserId(order.getUserId())
-                    .map(cartList -> cartList.stream()
-                            .map(cart -> new OrderDetails(orderId, cart.getCart().getFlowerId(), cart.getFlower().getPrice(), cart.getCart().getAmount()))
-                            .collect(Collectors.toList()))
-                    .flatMapCompletable(orderDetailsDao::add);
-            Completable.mergeArray(odAddObs, cartDao.deleteByUserId(order.getUserId()))
+            cartDao.getByUserId(order.getUserId())
+                    .flatMapCompletable(cartList -> {
+                        List<OrderDetails> orderDetailsList = cartList.stream()
+                                .map(cart -> new OrderDetails(orderId, cart.getCart().getFlowerId(), cart.getFlower().getPrice(), cart.getCart().getAmount()))
+                                .collect(Collectors.toList());
+                        List<Flower> updatedFlowers = cartList.stream()
+                                .map(cart -> {
+                                    Flower flower = cart.getFlower();
+                                    flower.setAmount(flower.getAmount() - cart.getCart().getAmount());
+                                    return flower;
+                                })
+                                .collect(Collectors.toList());
+                        return Completable.mergeArray(
+                                flowerDao.update(updatedFlowers),
+                                orderDetailsDao.add(orderDetailsList),
+                                cartDao.deleteByUserId(order.getUserId())
+                        );
+                    })
                     .blockingAwait();
         }
         return orderId;

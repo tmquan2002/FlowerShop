@@ -2,11 +2,13 @@ package com.example.flowershop.dao;
 
 import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.flowershop.model.Flower;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
 @Dao
@@ -19,4 +21,7 @@ public interface FlowerDao {
 
     @Query("SELECT * FROM flower WHERE name LIKE '%' || :name || '%'")
     Single<List<Flower>> getByName(String name);
+
+    @Update
+    Completable update(List<Flower> flowers);
 }
