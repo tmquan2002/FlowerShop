@@ -34,13 +34,13 @@ public abstract class OrderDao {
         flowerDao = db.flowerDao();
     }
 
-    @Query("SELECT * FROM `order` WHERE userId = :userId")
+    @Query("SELECT * FROM `order` WHERE userId = :userId ORDER BY orderDate DESC")
     public abstract Single<List<Order>> getByUserId(int userId);
 
     @Query("SELECT * FROM `order` WHERE id = :id")
     public abstract Single<Order> getById(int id);
 
-    @Query("SELECT * FROM `order`")
+    @Query("SELECT * FROM `order` ORDER BY orderDate DESC")
     public abstract Single<List<Order>> getAll();
 
     @Insert
