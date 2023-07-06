@@ -64,6 +64,7 @@ public class CartFragment extends Fragment {
             //TODO: Open dialog to add user shipping info
             order(UserHelper.getAuthUser().getId());
             //TODO: Navigate to order detail to show what user has ordered
+            getCart();
         });
         getCart();
         return view;
@@ -71,7 +72,7 @@ public class CartFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.topbar, menu);
+        inflater.inflate(R.menu.top_bar, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(@NonNull MenuItem item) {
@@ -144,7 +145,7 @@ public class CartFragment extends Fragment {
         mDisposable.add(FlowerDatabase.getInstance(context).orderDao().createOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((orderId) -> Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show(),
+                .subscribe((orderId) -> Toast.makeText(getActivity(), "Oder Added!", Toast.LENGTH_LONG).show(),
                         throwable -> Log.e("GetFailed", "createOrder: Cannot add order", throwable)));
     }
 

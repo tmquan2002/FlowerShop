@@ -60,6 +60,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView itemName, itemAmount;
+        //TODO: edit, delete function
         ImageView imageView, edit, delete;
         LinearLayout middleLinear;
 

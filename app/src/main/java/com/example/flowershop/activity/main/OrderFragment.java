@@ -40,12 +40,14 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        rv = view.findViewById(R.id.list);
+        getOrder();
+        return view;
     }
 
     private void getOrder() {
-        UserHelper userHelper = new UserHelper();
-        mDisposable.add(FlowerDatabase.getInstance(context).orderDao().getByUserId(userHelper.getAuthUser().getId())
+        mDisposable.add(FlowerDatabase.getInstance(context).orderDao().getByUserId(UserHelper.getAuthUser().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((orderList) -> {

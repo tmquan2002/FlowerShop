@@ -15,6 +15,8 @@ import com.example.flowershop.R;
 import com.example.flowershop.activity.main.MainActivity;
 import com.example.flowershop.util.UserHelper;
 
+import java.util.Objects;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Objects.requireNonNull(getSupportActionBar()).hide();
         TextView toSignUp = findViewById(R.id.toSignUp);
         back = findViewById(R.id.backBtn);
         signIn = findViewById(R.id.btnSignIn);
@@ -54,9 +57,20 @@ public class LoginActivity extends AppCompatActivity {
                 .subscribe((user) -> {
                     UserHelper.setAuthUser(user);
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }, throwable -> {
                     Log.e("GetFailed", "getUser: Cannot get the user", throwable);
                     Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_LONG).show();
                 })));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // clear all the subscriptions
+        mDisposable.clear();
     }
 }

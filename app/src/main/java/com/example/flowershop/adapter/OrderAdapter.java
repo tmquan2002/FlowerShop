@@ -38,10 +38,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = list.get(position);
-        holder.numOrder.setText(position + 1);
-        holder.id.setText(order.getId());
+        holder.numOrder.setText(String.format("%s", position + 1));
+        holder.id.setText(String.format("ID: %s", order.getId()));
         holder.orderDate.setText(String.format("Order Date: %s", order.getOrderDate()));
-        holder.deliverDate.setText(String.format("Deliver Date; %s", order.getDeliveryDate()));
+        holder.deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : order.getDeliveryDate()));
         //TODO: Add edit and delete function
         holder.itemView.setOnClickListener(v -> {
 //            AppCompatActivity activity = (AppCompatActivity) v.getContext();

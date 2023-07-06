@@ -37,7 +37,7 @@ public class UserListChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.topbar, menu);
+        getMenuInflater().inflate(R.menu.top_bar, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(@NonNull MenuItem item) {

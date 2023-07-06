@@ -28,20 +28,20 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DetailFragment extends Fragment {
+public class OrderDetailFragment extends Fragment {
     static Flower currentFlower;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     int currentAmountChoose = 0;
     Context context;
 
-    public DetailFragment() {
+    public OrderDetailFragment() {
         // Required empty public constructor
     }
 
-    public static DetailFragment newInstance(Flower flower) {
+    public static OrderDetailFragment newInstance(Flower flower) {
         //Get flower details from item and add hto args bundle
         currentFlower = flower;
-        return new DetailFragment();
+        return new OrderDetailFragment();
     }
 
     @Override

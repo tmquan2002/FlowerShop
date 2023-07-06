@@ -12,6 +12,8 @@ import com.example.flowershop.activity.account.SignupActivity;
 import com.example.flowershop.util.UserHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadFragment(new HomeFragment());
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Flower Shop");
         bottomNavigationView = findViewById(R.id.bottom_nav);
         if (UserHelper.getAuthUser() == null) {
             bottomNavigationView.getMenu().clear();
@@ -31,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Flower Shop");
                 loadFragment(new HomeFragment());
             } else if (item.getItemId() == R.id.cart) {
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Your Cart");
                 loadFragment(new CartFragment());
             } else if (item.getItemId() == R.id.order) {
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Your Order");
                 loadFragment(new OrderFragment());
             } else if (item.getItemId() == R.id.logout) {
                 loadFragment(new HomeFragment());
