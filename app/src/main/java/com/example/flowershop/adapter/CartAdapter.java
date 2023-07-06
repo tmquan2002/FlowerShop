@@ -51,6 +51,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             DetailFragment detailFragment = DetailFragment.newInstance(cartAndFlower.getFlower());
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
         });
+        holder.edit.setOnClickListener(v -> {
+
+        });
+        holder.delete.setOnClickListener(v -> {
+
+        });
     }
 
     @Override
@@ -66,8 +72,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemName = itemView.findViewById(R.id.itemAddress);
-            itemAmount = itemView.findViewById(R.id.itemPhone);
+            itemName = itemView.findViewById(R.id.itemCartName);
+            itemAmount = itemView.findViewById(R.id.itemCartAmount);
             imageView = itemView.findViewById(R.id.itemImage);
             edit = itemView.findViewById(R.id.edit);
             delete = itemView.findViewById(R.id.delete);

@@ -13,7 +13,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/flowerHomeImage"
+        android:id="@+id/orderDetailListImage"
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
@@ -29,7 +29,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/flowerHomeName"
+            android:id="@+id/orderDetailListFlowerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
@@ -39,7 +39,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/flowerHomeDescription"
+            android:id="@+id/orderDetailListAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/flowerHomePrice"
+        android:id="@+id/orderDetailListPrice"
         android:layout_width="95dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

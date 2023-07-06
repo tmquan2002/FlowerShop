@@ -36,8 +36,8 @@ public class SignupActivity extends AppCompatActivity {
         back = findViewById(R.id.backBtn);
         signUp = findViewById(R.id.btnSignUp);
 
-        username = findViewById(R.id.editDialogAddress);
-        password = findViewById(R.id.editDialogPhone);
+        username = findViewById(R.id.signUpUsername);
+        password = findViewById(R.id.signUpPassword);
         confirm = findViewById(R.id.confirm);
 
         toSignIn.setOnClickListener(v -> {

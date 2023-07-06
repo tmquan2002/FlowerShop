@@ -137,6 +137,9 @@ public class DetailFragment extends Fragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> Toast.makeText(getActivity(), "Added", Toast.LENGTH_LONG).show(),
-                        throwable -> Log.e("GetFailed", "getFlower: Cannot get the list", throwable)));
+                        throwable -> {
+                            Toast.makeText(getActivity(), "Not enough product from store", Toast.LENGTH_LONG).show();
+                            Log.e("GetFailed", "getFlower: Cannot get the list", throwable);
+                        }));
     }
 }

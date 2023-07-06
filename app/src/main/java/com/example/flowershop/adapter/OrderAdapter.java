@@ -7,11 +7,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flowershop.R;
+import com.example.flowershop.activity.main.OrderDetailFragment;
 import com.example.flowershop.model.Order;
 
+import java.text.DateFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,13 +43,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Order order = list.get(position);
         holder.numOrder.setText(String.format("%s", position + 1));
         holder.id.setText(String.format("ID: %s", order.getId()));
-        holder.orderDate.setText(String.format("Order Date: %s", order.getOrderDate()));
-        holder.deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : order.getDeliveryDate()));
-        //TODO: Add edit and delete function
+        holder.orderDate.setText(String.format("Order Date: %s", DateFormat.getDateInstance(DateFormat.SHORT).format(order.getOrderDate())));
+        holder.deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : DateFormat.getDateInstance(DateFormat.SHORT).format(order.getDeliveryDate())));
         holder.itemView.setOnClickListener(v -> {
-//            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//            DetailFragment detailFragment = DetailFragment.newInstance(order);
-//            activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            OrderDetailFragment detailFragment = OrderDetailFragment.newInstance(order.getId());
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
         });
     }
 

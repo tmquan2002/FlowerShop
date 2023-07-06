@@ -46,7 +46,6 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
         holder.itemDescription.setText(flower.getDescription());
         holder.price.setText(String.format("%s VND", flower.getPrice()));
         Glide.with(context).load(flower.getImageUrl()).into(holder.imageView);
-        //TODO: Add edit and delete function
         holder.itemView.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             DetailFragment detailFragment = DetailFragment.newInstance(flower);
@@ -67,10 +66,10 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            price = itemView.findViewById(R.id.price);
-            itemName = itemView.findViewById(R.id.itemAddress);
-            itemDescription = itemView.findViewById(R.id.itemPhone);
-            imageView = itemView.findViewById(R.id.itemImage);
+            price = itemView.findViewById(R.id.flowerHomePrice);
+            itemName = itemView.findViewById(R.id.flowerHomeName);
+            itemDescription = itemView.findViewById(R.id.flowerHomeDescription);
+            imageView = itemView.findViewById(R.id.flowerHomeImage);
         }
     }
 }

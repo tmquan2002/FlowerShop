@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +38,7 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
 
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     List<CartAndFlower> list;
+    private CartAdapter adapter;
     private RecyclerView rv;
     private Context context;
     private TextView cartTotal;
@@ -60,11 +62,7 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
         rv = view.findViewById(R.id.cartList);
         cartTotal = view.findViewById(R.id.cart_total);
         Button btnOrder = view.findViewById(R.id.btnOrder);
-        btnOrder.setOnClickListener(v -> {
-            //TODO: Open dialog to add user shipping info
-            openDialog();
-            //TODO: Navigate to order detail to show what user has ordered
-        });
+        btnOrder.setOnClickListener(v -> openDialog());
         getCart();
         return view;
     }
@@ -145,12 +143,16 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
     }
 
     private void order(int userID, String address, String phone) {
-        //TODO: Replace with dialog info
         Order order = Order.builder().phone(phone).address(address).userId(userID).build();
         mDisposable.add(FlowerDatabase.getInstance(context).orderDao().createOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((orderId) -> Toast.makeText(getActivity(), "Oder Added!", Toast.LENGTH_LONG).show(),
+                .subscribe((orderId) -> {
+                            Toast.makeText(getActivity(), "Oder Added!", Toast.LENGTH_LONG).show();
+                            AppCompatActivity activity = (AppCompatActivity) context;
+                            OrderDetailFragment detailFragment = OrderDetailFragment.newInstance(Math.toIntExact(orderId));
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.navBody, detailFragment).addToBackStack(null).commit();
+                        },
                         throwable -> Log.e("GetFailed", "createOrder: Cannot add order", throwable)));
     }
 

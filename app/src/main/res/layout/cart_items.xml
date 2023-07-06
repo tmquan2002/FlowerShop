@@ -30,7 +30,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/itemAddress"
+            android:id="@+id/itemCartName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
@@ -40,7 +40,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/itemPhone"
+            android:id="@+id/itemCartAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
