@@ -33,7 +33,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements AddressDialogFragment.DialogListener {
 
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     List<CartAndFlower> list;
@@ -62,12 +62,17 @@ public class CartFragment extends Fragment {
         Button btnOrder = view.findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(v -> {
             //TODO: Open dialog to add user shipping info
-            order(UserHelper.getAuthUser().getId());
+            openDialog();
             //TODO: Navigate to order detail to show what user has ordered
-            getCart();
         });
         getCart();
         return view;
+    }
+
+    private void openDialog() {
+        AddressDialogFragment dialogFragment = AddressDialogFragment.newInstance();
+        dialogFragment.setTargetFragment(this, 0);
+        dialogFragment.show(getParentFragmentManager(), "AddressDialogFragment");
     }
 
     @Override
@@ -139,9 +144,9 @@ public class CartFragment extends Fragment {
                         throwable -> Log.e("GetFailed", "getCart: Cannot get the list", throwable)));
     }
 
-    private void order(int userID) {
+    private void order(int userID, String address, String phone) {
         //TODO: Replace with dialog info
-        Order order = Order.builder().phone("09992").address("2231/213").userId(userID).build();
+        Order order = Order.builder().phone(phone).address(address).userId(userID).build();
         mDisposable.add(FlowerDatabase.getInstance(context).orderDao().createOrder(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -155,5 +160,12 @@ public class CartFragment extends Fragment {
 
         // clear all the subscriptions
         mDisposable.clear();
+    }
+
+    @Override
+    public void onDataReceived(String address, String phone) {
+        order(UserHelper.getAuthUser().getId(), address, phone);
+        getCart();
+        //TODO: Navigate to order detail to show what user has ordered
     }
 }

@@ -14,7 +14,6 @@ import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.main.MainActivity;
 import com.example.flowershop.model.User;
-import com.example.flowershop.util.UserHelper;
 
 import java.util.Objects;
 
@@ -37,8 +36,8 @@ public class SignupActivity extends AppCompatActivity {
         back = findViewById(R.id.backBtn);
         signUp = findViewById(R.id.btnSignUp);
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        username = findViewById(R.id.editDialogAddress);
+        password = findViewById(R.id.editDialogPhone);
         confirm = findViewById(R.id.confirm);
 
         toSignIn.setOnClickListener(v -> {
@@ -53,7 +52,9 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         signUp.setOnClickListener(v -> {
-            if (!password.getText().toString().equals(confirm.getText().toString())) {
+            if (username.getText().toString().trim().matches("") || password.getText().toString().trim().matches("") || confirm.getText().toString().trim().matches("")) {
+                Toast.makeText(SignupActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+            } else if (!password.getText().toString().equals(confirm.getText().toString())) {
                 Toast.makeText(SignupActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
             } else {
                 User newUser = User.builder().username(username.getText().toString()).password(password.getText().toString()).build();

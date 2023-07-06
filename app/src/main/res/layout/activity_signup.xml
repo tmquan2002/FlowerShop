@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/editDialogAddress"
         android:layout_width="350dp"
         android:layout_height="52dp"
         android:layout_marginTop="32dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/editDialogPhone"
         android:layout_width="350dp"
         android:layout_height="52dp"
         android:layout_marginTop="32dp"
@@ -53,7 +53,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/editDialogAddress" />
 
     <EditText
         android:id="@+id/confirm"
@@ -66,7 +66,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/editDialogPhone" />
 
     <TextView
         android:id="@+id/toSignIn"
