@@ -12,16 +12,13 @@
     android:elevation="20dp"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/numberOrder"
-        android:layout_width="70dp"
+    <ImageView
+        android:id="@+id/flowerHomeImage"
+        android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:padding="3dp"
-        android:text="1"
-        android:textAlignment="gravity"
-        android:gravity="center"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:scaleType="fitCenter"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/flower_foreground" />
 
     <LinearLayout
         android:layout_width="148dp"
@@ -32,43 +29,35 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/itemId"
+            android:id="@+id/flowerHomeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="ID: 1"
+            android:text="Name"
             android:textColor="#000"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/itemDate"
+            android:id="@+id/flowerHomeDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="Order Date: 02/09/2022"
+            android:text="Description"
             android:textAlignment="gravity"
             android:textColor="#7F7F7F"
-            android:textSize="10sp" />
-        <TextView
-            android:id="@+id/itemDeliver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:text="Deliver Date: 02/09/2022"
-            android:textAlignment="gravity"
-            android:textColor="#7F7F7F"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/itemStatus"
-        android:layout_width="50dp"
+        android:id="@+id/flowerHomePrice"
+        android:layout_width="95dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="PENDING"
+        android:text="500 VND"
+        android:textColor="#000"
         android:textSize="15sp"
         android:textStyle="bold" />
 
