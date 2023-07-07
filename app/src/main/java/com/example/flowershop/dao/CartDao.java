@@ -31,6 +31,7 @@ public abstract class CartDao {
     public abstract Single<List<CartAndFlower>> getByUserId(int userId);
 
     @Query("SELECT * FROM cart WHERE userId = :userId AND flowerId = :flowerId")
+    @Transaction
     protected abstract Single<CartAndFlower> getByUserIdAndFlowerId(int userId, int flowerId);
 
     @Insert

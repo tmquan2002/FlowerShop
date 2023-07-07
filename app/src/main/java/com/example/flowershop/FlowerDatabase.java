@@ -28,15 +28,21 @@ import com.example.flowershop.model.User;
         })
 @TypeConverters({Converter.class})
 public abstract class FlowerDatabase extends RoomDatabase {
-    private static FlowerDatabase instance;
+    private static volatile FlowerDatabase instance;
+
+    protected FlowerDatabase() {
+    }
 
     public static FlowerDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                            FlowerDatabase.class,
-                            "FlowerShop")
-                    .createFromAsset("database/FlowerShop.db")
-                    .build();
+            synchronized (FlowerDatabase.class) {
+                if (instance == null)
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
+                                    FlowerDatabase.class,
+                                    "FlowerShop")
+                            .createFromAsset("database/FlowerShop.db")
+                            .build();
+            }
         }
         return instance;
     }
