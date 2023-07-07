@@ -1,6 +1,5 @@
 package com.example.flowershop;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.room.AutoMigration;

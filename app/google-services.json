@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "511455372148",
+    "firebase_url": "https://chatappfirebase-f22ee-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "chatappfirebase-f22ee",
+    "storage_bucket": "chatappfirebase-f22ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511455372148:android:a13f93430db88a84144221",
+        "android_client_info": {
+          "package_name": "com.example.flowershop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511455372148-b4f675pr63ojo975dn4l3nqmn7uu522t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBptRnwCOcfsEMk0H5XjWV5mRB__7AIN-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511455372148-b4f675pr63ojo975dn4l3nqmn7uu522t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511455372148:android:4ae31b1cf5154e12144221",
+        "android_client_info": {
+          "package_name": "fpt.se160240.chatappfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511455372148-b4f675pr63ojo975dn4l3nqmn7uu522t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBptRnwCOcfsEMk0H5XjWV5mRB__7AIN-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511455372148-b4f675pr63ojo975dn4l3nqmn7uu522t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
