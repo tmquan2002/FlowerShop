@@ -46,7 +46,7 @@
             android:padding="3dp"
             android:text="Amount"
             android:textAlignment="gravity"
-            android:textColor="#7F7F7F"
+            android:textColor="@color/gray"
             android:textSize="15sp" />
 
     </LinearLayout>

@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="violet">#5725A0</color>
     <color name="violet_light">#3DEEE3FF</color>
+    <color name="gray">#B3B3B3</color>
+    <color name="grey_light">#E4E6EB</color>
 </resources>

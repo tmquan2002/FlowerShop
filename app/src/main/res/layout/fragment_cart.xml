@@ -21,7 +21,7 @@
         android:layout_marginStart="32dp"
         android:padding="5dp"
         android:text="Total"
-        android:textColor="#A4A4A4"
+        android:textColor="@color/gray"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/cart_total"
         app:layout_constraintStart_toStartOf="parent" />

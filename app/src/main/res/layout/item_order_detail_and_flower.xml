@@ -45,7 +45,7 @@
             android:padding="3dp"
             android:text="Description"
             android:textAlignment="gravity"
-            android:textColor="#7F7F7F"
+            android:textColor="@color/gray"
             android:textSize="11sp" />
 
     </LinearLayout>

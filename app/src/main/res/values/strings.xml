@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FlowerShop</string>
+    <string name="app_name">Flower Shop</string>
     <string name="sign_in_help">New to our app? <b>Create one</b></string>
     <string name="sign_up_help">Already have an account? <b>Sign in</b></string>
     <string name="sign_in_title"><b>SIGN IN</b></string>
@@ -14,4 +14,9 @@
     <string name="fab_add">Extra</string>
     <string name="fab_email">Chat With Us</string>
     <string name="fab_map">View Map</string>
+    <string name="chat_username">Username</string>
+    <string name="chat_message">message</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="back_button">Back</string>
+    <string name="send">Send</string>
 </resources>

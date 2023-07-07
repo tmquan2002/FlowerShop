@@ -22,7 +22,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="Address:  123/234 ABC"
-            android:textColor="#B3B3B3"
+            android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderDetailOrderDate" />
 
@@ -57,7 +57,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="Phone: 12345"
-            android:textColor="#B3B3B3"
+            android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderDetailAddress" />
 
@@ -79,7 +79,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="Deliver Date: "
-            android:textColor="#B3B3B3"
+            android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderDetailPhone" />
 

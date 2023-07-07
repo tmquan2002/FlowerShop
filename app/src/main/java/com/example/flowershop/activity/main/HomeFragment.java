@@ -1,6 +1,7 @@
 package com.example.flowershop.activity.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
+import com.example.flowershop.activity.account.LoginActivity;
 import com.example.flowershop.adapter.FlowerAdapter;
 import com.example.flowershop.model.Flower;
+import com.example.flowershop.util.UserHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -88,7 +91,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        email.setOnClickListener(v -> Toast.makeText(context, "Email Clicked!", Toast.LENGTH_SHORT).show());
+        email.setOnClickListener(v -> {
+            if (UserHelper.getAuthUser() == null) {
+                startActivity(new Intent(context, LoginActivity.class));
+            } else {
+                startActivity(new Intent(context, ChatBoxActivity.class));
+            }
+        });
 
         map.setOnClickListener(v -> Toast.makeText(context, "Map CLicked!", Toast.LENGTH_SHORT).show());
         return view;

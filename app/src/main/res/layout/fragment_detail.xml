@@ -48,7 +48,7 @@
         android:layout_marginEnd="32dp"
         android:padding="10dp"
         android:text="Amount"
-        android:textColor="#A4A4A4"
+        android:textColor="@color/gray"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/flower_description"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
         android:layout_marginStart="20dp"
         android:padding="10dp"
         android:text="Description"
-        android:textColor="#A4A4A4"
+        android:textColor="@color/gray"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flower_price" />
@@ -106,7 +106,7 @@
         android:layout_marginStart="32dp"
         android:padding="5dp"
         android:text="Total"
-        android:textColor="#A4A4A4"
+        android:textColor="@color/gray"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/total"
         app:layout_constraintStart_toStartOf="parent" />
