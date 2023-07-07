@@ -19,12 +19,6 @@
             android:name=".activity.user.UserChatBoxActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.admin.AdminChatBoxActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.admin.UserListChatActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.account.SignupActivity"
             android:exported="false" />
         <activity

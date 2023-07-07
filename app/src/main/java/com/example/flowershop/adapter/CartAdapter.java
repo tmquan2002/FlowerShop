@@ -31,7 +31,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final List<CartAndFlower> list;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
-    Context context;
+    final Context context;
     private final OnItemChangeListener cartAdapterListener;
 
     public CartAdapter(List<CartAndFlower> list, Context context, OnItemChangeListener cartAdapterListener) {
@@ -87,9 +87,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName, itemAmount;
-        ImageView imageView, delete;
-        LinearLayout middleLinear;
+        final TextView itemName;
+        final TextView itemAmount;
+        final ImageView imageView;
+        final ImageView delete;
+        final LinearLayout middleLinear;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

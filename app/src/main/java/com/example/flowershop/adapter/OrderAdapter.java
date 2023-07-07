@@ -18,7 +18,7 @@ import java.text.DateFormat;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
-    Context context;
+    final Context context;
     private final List<Order> list;
 
     public OrderAdapter(List<Order> list, Context context) {
@@ -57,7 +57,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView numOrder, id, orderDate, deliverDate, status;
+        final TextView numOrder;
+        final TextView id;
+        final TextView orderDate;
+        final TextView deliverDate;
+        final TextView status;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

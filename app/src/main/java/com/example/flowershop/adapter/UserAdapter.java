@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private final List<User> list;
-    Context context;
+    final Context context;
 
     public UserAdapter(List<User> list, Context context) {
         this.list = list;
@@ -49,7 +49,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView userName;
+        final TextView userName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

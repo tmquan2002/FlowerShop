@@ -19,7 +19,7 @@ import com.example.flowershop.model.Flower;
 import java.util.List;
 
 public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder> {
-    Context context;
+    final Context context;
     private final List<Flower> list;
 
     public FlowerAdapter(List<Flower> list, Context context) {
@@ -58,10 +58,10 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName;
-        TextView itemDescription;
-        TextView price;
-        ImageView imageView;
+        final TextView itemName;
+        final TextView itemDescription;
+        final TextView price;
+        final ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

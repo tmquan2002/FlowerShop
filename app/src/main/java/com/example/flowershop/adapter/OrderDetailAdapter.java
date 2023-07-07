@@ -17,7 +17,7 @@ import com.example.flowershop.model.relation.OrderDetailsAndFlower;
 import java.util.List;
 
 public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
-    Context context;
+    final Context context;
     private final List<OrderDetailsAndFlower> list;
 
     public OrderDetailAdapter(List<OrderDetailsAndFlower> list, Context context) {
@@ -51,8 +51,10 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView flowerName, amount, price;
-        ImageView imageView;
+        final TextView flowerName;
+        final TextView amount;
+        final TextView price;
+        final ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

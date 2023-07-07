@@ -9,10 +9,69 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:contentDescription="@string/fab_add"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_add_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_email_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:contentDescription="@string/fab_email"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_email_24"
+        android:focusable="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_map_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/fab_map"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/fab_email_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_map_24"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/fab_email_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="@string/fab_email"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_email_id"
+        app:layout_constraintEnd_toStartOf="@+id/fab_email_id"
+        app:layout_constraintTop_toTopOf="@+id/fab_email_id" />
+
+    <TextView
+        android:id="@+id/fab_map_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="@string/fab_map"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_map_id"
+        app:layout_constraintEnd_toStartOf="@+id/fab_map_id"
+        app:layout_constraintTop_toTopOf="@+id/fab_map_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
