@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Users"
+        android:id="@+id/manageUser"
+        android:icon="@drawable/baseline_person_24"/>
+    <item
+        android:title="Orders"
+        android:id="@+id/manageOrder"
+        android:icon="@drawable/baseline_order_24"/>
+    <item
+        android:title="Logout"
+        android:id="@+id/logout"
+        android:icon="@drawable/baseline_logout_24"/>
+</menu>
