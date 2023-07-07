@@ -34,17 +34,22 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class CartFragment extends Fragment implements AddressDialogFragment.DialogListener {
+public class CartFragment extends Fragment implements AddressDialogFragment.DialogListener, CartAdapter.OnItemChangeListener {
 
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     List<CartAndFlower> list;
-    private CartAdapter adapter;
     private RecyclerView rv;
     private Context context;
     private TextView cartTotal;
 
     public CartFragment() {
         // Required empty public constructor
+    }
+
+    private void setupRecyclerView(List<CartAndFlower> list) {
+        CartAdapter adapter = new CartAdapter(list, context, this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(context));
     }
 
     @Override
@@ -68,9 +73,13 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
     }
 
     private void openDialog() {
-        AddressDialogFragment dialogFragment = AddressDialogFragment.newInstance();
-        dialogFragment.setTargetFragment(this, 0);
-        dialogFragment.show(getParentFragmentManager(), "AddressDialogFragment");
+        if (list.isEmpty()) {
+            Toast.makeText(context, "Your cart is empty", Toast.LENGTH_SHORT).show();
+        } else {
+            AddressDialogFragment dialogFragment = AddressDialogFragment.newInstance();
+            dialogFragment.setTargetFragment(this, 0);
+            dialogFragment.show(getParentFragmentManager(), "AddressDialogFragment");
+        }
     }
 
     @Override
@@ -84,9 +93,7 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
 
             @Override
             public boolean onMenuItemActionCollapse(@NonNull MenuItem item) {
-                CartAdapter adapter = new CartAdapter(list, context);
-                rv.setAdapter(adapter);
-                rv.setLayoutManager(new LinearLayoutManager(context));
+                setupRecyclerView(list);
                 return true;
             }
         });
@@ -96,9 +103,7 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query == null || query.trim().isEmpty()) {
-                    CartAdapter adapter = new CartAdapter(list, context);
-                    rv.setAdapter(adapter);
-                    rv.setLayoutManager(new LinearLayoutManager(context));
+                    setupRecyclerView(list);
                 } else {
                     List<CartAndFlower> filteredList = new ArrayList<>();
                     for (CartAndFlower cartAndFlower : list) {
@@ -106,9 +111,7 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
                             filteredList.add(cartAndFlower);
                         }
                     }
-                    CartAdapter adapter = new CartAdapter(filteredList, context);
-                    rv.setAdapter(adapter);
-                    rv.setLayoutManager(new LinearLayoutManager(context));
+                    setupRecyclerView(filteredList);
                 }
                 return true;
             }
@@ -122,15 +125,14 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void getCart() {
+    @Override
+    public void getCart() {
         mDisposable.add(FlowerDatabase.getInstance(context).cartDao().getByUserId(UserHelper.getAuthUser().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((cartAndFlowerList) -> {
                             list = cartAndFlowerList;
-                            CartAdapter adapter = new CartAdapter(list, context);
-                            rv.setAdapter(adapter);
-                            rv.setLayoutManager(new LinearLayoutManager(context));
+                            setupRecyclerView(list);
 
                             //Total Cart Price
                             double total = 0;
@@ -168,6 +170,5 @@ public class CartFragment extends Fragment implements AddressDialogFragment.Dial
     public void onDataReceived(String address, String phone) {
         order(UserHelper.getAuthUser().getId(), address, phone);
         getCart();
-        //TODO: Navigate to order detail to show what user has ordered
     }
 }

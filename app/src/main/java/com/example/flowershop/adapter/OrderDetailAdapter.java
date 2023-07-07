@@ -14,12 +14,11 @@ import com.bumptech.glide.Glide;
 import com.example.flowershop.R;
 import com.example.flowershop.model.relation.OrderDetailsAndFlower;
 
-import java.util.Collections;
 import java.util.List;
 
 public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
     Context context;
-    private List<OrderDetailsAndFlower> list = Collections.emptyList();
+    private final List<OrderDetailsAndFlower> list;
 
     public OrderDetailAdapter(List<OrderDetailsAndFlower> list, Context context) {
         this.list = list;
@@ -32,7 +31,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.order_detail_and_flower_items, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_order_detail_and_flower, parent, false);
 
         return new ViewHolder(view);
     }

@@ -12,11 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flowershop.R;
 import com.example.flowershop.model.User;
 
-import java.util.Collections;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private List<User> list = Collections.emptyList();
+    private final List<User> list;
     Context context;
 
     public UserAdapter(List<User> list, Context context) {
@@ -30,7 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.user_items, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_user, parent, false);
 
         return new UserAdapter.ViewHolder(view);
     }

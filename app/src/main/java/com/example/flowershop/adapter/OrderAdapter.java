@@ -15,12 +15,11 @@ import com.example.flowershop.activity.main.OrderDetailFragment;
 import com.example.flowershop.model.Order;
 
 import java.text.DateFormat;
-import java.util.Collections;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
     Context context;
-    private List<Order> list = Collections.emptyList();
+    private final List<Order> list;
 
     public OrderAdapter(List<Order> list, Context context) {
         this.list = list;
@@ -33,7 +32,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.order_items, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_order, parent, false);
 
         return new ViewHolder(view);
     }

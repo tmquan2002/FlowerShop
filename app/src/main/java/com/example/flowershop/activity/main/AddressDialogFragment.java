@@ -28,7 +28,7 @@ public class AddressDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.address_dialog, container, false);
+        View view = inflater.inflate(R.layout.dialog_address, container, false);
 
         Button confirm = view.findViewById(R.id.btnConfirm);
         Button cancel = view.findViewById(R.id.btnCancel);

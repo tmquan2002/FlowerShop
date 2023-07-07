@@ -16,12 +16,11 @@ import com.example.flowershop.R;
 import com.example.flowershop.activity.main.DetailFragment;
 import com.example.flowershop.model.Flower;
 
-import java.util.Collections;
 import java.util.List;
 
 public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder> {
     Context context;
-    private List<Flower> list = Collections.emptyList();
+    private final List<Flower> list;
 
     public FlowerAdapter(List<Flower> list, Context context) {
         this.list = list;
@@ -34,7 +33,7 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.ViewHolder
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.flower_items, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_flower, parent, false);
 
         return new ViewHolder(view);
     }
