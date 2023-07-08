@@ -17,7 +17,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class UserAdapter extends FirebaseRecyclerAdapter<User, UserAdapter.ViewHolder> {
 
-
     public UserAdapter(ComponentActivity parent) {
         super(new FirebaseRecyclerOptions
                 .Builder<User>()

@@ -100,13 +100,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        map.setOnClickListener(v -> {
-            if (UserHelper.getAuthUser() == null) {
-                startActivity(new Intent(context, LoginActivity.class));
-            } else {
-                startActivity(new Intent(context, MapViewActivity.class));
-            }
-        });
+        map.setOnClickListener(v -> startActivity(new Intent(context, MapViewActivity.class)));
         return view;
     }
 

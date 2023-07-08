@@ -44,6 +44,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.id.setText(String.format("ID: %s", order.getId()));
         holder.orderDate.setText(String.format("Order Date: %s", DateFormat.getDateInstance(DateFormat.SHORT).format(order.getOrderDate())));
         holder.deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : DateFormat.getDateInstance(DateFormat.SHORT).format(order.getDeliveryDate())));
+        holder.status.setText(String.format(order.getStatus().toString()));
         holder.itemView.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             OrderDetailFragment detailFragment = OrderDetailFragment.newInstance(order.getId());
