@@ -19,4 +19,10 @@
     <string name="type_a_message">Type a message</string>
     <string name="back_button">Back</string>
     <string name="send">Send</string>
+    <string name="notif_channel_name">Cart not empty</string>
+    <string name="notif_cart_not_empty_title">Cart is not empty</string>
+    <plurals name="notif_cart_not_empty_message">
+        <item quantity="one">You have %d flower in your cart</item>
+        <item quantity="other">You have %d flowers in your cart</item>
+    </plurals>
 </resources>
