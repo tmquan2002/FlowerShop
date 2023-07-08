@@ -18,6 +18,7 @@ import com.example.flowershop.R;
 import com.example.flowershop.adapter.OrderDetailAdapter;
 import com.example.flowershop.model.Order;
 import com.example.flowershop.model.relation.OrderDetailsAndFlower;
+import com.example.flowershop.util.Formatter;
 
 import java.text.DateFormat;
 import java.util.List;
@@ -92,11 +93,11 @@ public class OrderDetailFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((order) -> {
                             currentOrder = order;
-                            orderDate.setText(String.format("Order Date: %s", DateFormat.getDateInstance(DateFormat.SHORT).format(order.getOrderDate())));
+                            orderDate.setText(String.format("Order Date: %s", Formatter.datetime(order.getOrderDate())));
                             address.setText(String.format("Address: %s", order.getAddress()));
                             phone.setText(String.format("Phone: %s", order.getPhone()));
                             status.setText(String.format("%s", order.getStatus()));
-                            deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : DateFormat.getDateInstance(DateFormat.SHORT).format(order.getDeliveryDate())));
+                            deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : Formatter.datetime(order.getDeliveryDate())));
                         },
                         throwable -> Log.e("GetFailed", "getByOrderId: Cannot get the list", throwable)));
     }

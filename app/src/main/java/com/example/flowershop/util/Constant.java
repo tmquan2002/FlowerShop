@@ -6,4 +6,5 @@ public class Constant {
     public static String DATABASE_REF_LAST_MESSAGE = "lastMessage";
     public static String NOTIF_CHANNEL_ID = "push_notification";
     public static int NOTIF_CART_ID = 1;
+    public static String DATETIME_PATTERN = "dd/MM/yyyy HH:mm:ss";
 }

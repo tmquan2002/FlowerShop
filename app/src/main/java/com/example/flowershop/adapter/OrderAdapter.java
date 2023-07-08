@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.main.OrderDetailFragment;
 import com.example.flowershop.model.Order;
+import com.example.flowershop.util.Formatter;
 
 import java.text.DateFormat;
 import java.util.List;
@@ -42,8 +43,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Order order = list.get(position);
         holder.numOrder.setText(String.format("%s", position + 1));
         holder.id.setText(String.format("ID: %s", order.getId()));
-        holder.orderDate.setText(String.format("Order Date: %s", DateFormat.getDateInstance(DateFormat.SHORT).format(order.getOrderDate())));
-        holder.deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : DateFormat.getDateInstance(DateFormat.SHORT).format(order.getDeliveryDate())));
+        holder.orderDate.setText(String.format("Order Date: %s", Formatter.datetime(order.getOrderDate())));
+        holder.deliverDate.setText(String.format("Deliver Date: %s", order.getDeliveryDate() == null ? "" : Formatter.datetime(order.getDeliveryDate())));
         holder.status.setText(String.format(order.getStatus().toString()));
         holder.itemView.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
