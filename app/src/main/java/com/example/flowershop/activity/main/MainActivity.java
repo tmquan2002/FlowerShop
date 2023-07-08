@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (UserHelper.getAuthUser().getRole() == UserRole.ADMIN) {
             bottomNavigationView.getMenu().clear();
             bottomNavigationView.inflateMenu(R.menu.bottom_nav_admin);
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Users");
+            loadFragment(new UserListFragment());
         } else {
             loadFragment(new HomeFragment());
             UserHelper.logout();

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
 import com.example.flowershop.activity.account.LoginActivity;
+import com.example.flowershop.activity.user.MapViewActivity;
 import com.example.flowershop.adapter.FlowerAdapter;
 import com.example.flowershop.model.Flower;
 import com.example.flowershop.util.UserHelper;
@@ -99,7 +100,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        map.setOnClickListener(v -> Toast.makeText(context, "Map CLicked!", Toast.LENGTH_SHORT).show());
+        map.setOnClickListener(v -> {
+            if (UserHelper.getAuthUser() == null) {
+                startActivity(new Intent(context, LoginActivity.class));
+            } else {
+                startActivity(new Intent(context, MapViewActivity.class));
+            }
+        });
         return view;
     }
 
