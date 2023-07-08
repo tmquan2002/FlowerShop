@@ -1,51 +1,47 @@
 package com.example.flowershop.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flowershop.R;
+import com.example.flowershop.database.FirebaseDb;
 import com.example.flowershop.model.User;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import java.util.List;
+public class UserAdapter extends FirebaseRecyclerAdapter<User, UserAdapter.ViewHolder> {
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private final List<User> list;
-    final Context context;
 
-    public UserAdapter(List<User> list, Context context) {
-        this.list = list;
-        this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-
-        View view = layoutInflater.inflate(R.layout.item_user, parent, false);
-
-        return new UserAdapter.ViewHolder(view);
+    public UserAdapter(ComponentActivity parent) {
+        super(new FirebaseRecyclerOptions
+                .Builder<User>()
+                .setQuery(FirebaseDb.getInstance().messageDao().getChatUserQuery(),
+                        User.class)
+                .setLifecycleOwner(parent)
+                .build());
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
-        User user = list.get(position);
-        holder.userName.setText(user.getUsername());
+    protected void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position, @NonNull User model) {
+        holder.userName.setText(model.getUsername());
         holder.itemView.setOnClickListener(v -> {
 
         });
     }
 
+    @NonNull
     @Override
-    public int getItemCount() {
-        return list.size();
+    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.item_user, parent, false);
+
+        return new UserAdapter.ViewHolder(view);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
