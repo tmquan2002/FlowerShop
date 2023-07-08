@@ -14,6 +14,9 @@ import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public abstract class UserDao {
+    @Query("SELECT * FROM user WHERE id = :id")
+    public abstract Single<User> getById(long id);
+
     @Query("SELECT * FROM user WHERE username = :username AND password = :password")
     public abstract Single<User> getByUsernameAndPassword(String username, String password);
 
