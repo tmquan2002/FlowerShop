@@ -8,9 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flowershop.FlowerDatabase;
@@ -18,7 +17,6 @@ import com.example.flowershop.R;
 import com.example.flowershop.activity.main.ChatBoxActivity;
 import com.example.flowershop.database.FirebaseDb;
 import com.example.flowershop.model.ChatUser;
-import com.example.flowershop.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
@@ -30,7 +28,7 @@ public class UserAdapter extends FirebaseRecyclerAdapter<ChatUser, UserAdapter.V
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     private Context context;
 
-    public UserAdapter(ComponentActivity parent, Context context) {
+    public UserAdapter(LifecycleOwner parent, Context context) {
         super(new FirebaseRecyclerOptions
                 .Builder<ChatUser>()
                 .setQuery(FirebaseDb.getInstance().messageDao().getChatUserQuery(),

@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flowershop.FlowerDatabase;
@@ -31,14 +31,14 @@ public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdap
     private final Context context;
     private int userId;
 
-    public ChatBoxAdapter(ComponentActivity parent, int userId) {
+    public ChatBoxAdapter(LifecycleOwner parent, Context context, int userId) {
         super(new FirebaseRecyclerOptions
                 .Builder<Message>()
                 .setQuery(FirebaseDb.getInstance().messageDao().getMessageQueryByUserId(userId),
                         Message.class)
                 .setLifecycleOwner(parent)
                 .build());
-        context = parent.getParent();
+        this.context = context;
         this.userId = userId;
     }
 
