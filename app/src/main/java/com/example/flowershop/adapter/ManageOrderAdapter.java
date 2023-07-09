@@ -64,7 +64,7 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
                 orderEdit.setStatus(OrderStatus.DELIVERING);
             } else if (order.getStatus() == OrderStatus.DELIVERING) {
                 orderEdit.setStatus(OrderStatus.DELIVERED);
-                orderEdit.setOrderDate(new Date());
+                orderEdit.setDeliveryDate(new Date());
             }
             mDisposable.add(FlowerDatabase.getInstance(context).orderDao().update(orderEdit)
                     .subscribeOn(Schedulers.io())
