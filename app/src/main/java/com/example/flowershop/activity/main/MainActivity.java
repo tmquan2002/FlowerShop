@@ -69,11 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
             } else if (item.getItemId() == R.id.manageUser) {
-                //TODO: Add User List before move to chat box
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Users");
                 loadFragment(new UserListFragment());
             } else if (item.getItemId() == R.id.manageOrder) {
-                //TODO: Add Order List
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Orders");
                 loadFragment(new ManageOrdersFragment());
             }

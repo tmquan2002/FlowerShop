@@ -1,5 +1,8 @@
 package com.example.flowershop.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,30 +10,49 @@ import android.widget.TextView;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flowershop.FlowerDatabase;
 import com.example.flowershop.R;
+import com.example.flowershop.activity.main.ChatBoxActivity;
 import com.example.flowershop.database.FirebaseDb;
+import com.example.flowershop.model.ChatUser;
 import com.example.flowershop.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class UserAdapter extends FirebaseRecyclerAdapter<User, UserAdapter.ViewHolder> {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-    public UserAdapter(ComponentActivity parent) {
+public class UserAdapter extends FirebaseRecyclerAdapter<ChatUser, UserAdapter.ViewHolder> {
+    private final CompositeDisposable mDisposable = new CompositeDisposable();
+    private Context context;
+
+    public UserAdapter(ComponentActivity parent, Context context) {
         super(new FirebaseRecyclerOptions
-                .Builder<User>()
+                .Builder<ChatUser>()
                 .setQuery(FirebaseDb.getInstance().messageDao().getChatUserQuery(),
-                        User.class)
+                        ChatUser.class)
                 .setLifecycleOwner(parent)
                 .build());
+        this.context = context;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position, @NonNull User model) {
-        holder.userName.setText(model.getUsername());
+    protected void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position, @NonNull ChatUser model) {
+        mDisposable.add(FlowerDatabase.getInstance(context).userDao().getById(model.getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((user) -> {
+                            holder.userName.setText(user.getUsername());
+                        },
+                        throwable -> Log.e("GetFailed", "getById: Cannot get the user", throwable)));
         holder.itemView.setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, ChatBoxActivity.class);
+            intent.putExtra("user_id", model.getUserId());
+            context.startActivity(intent);
         });
     }
 

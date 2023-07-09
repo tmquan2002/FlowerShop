@@ -14,7 +14,8 @@
     <string name="fab_add">Extra</string>
     <string name="fab_email">Chat With Us</string>
     <string name="fab_map">View Map</string>
-    <string name="chat_username">Username</string>
+    <string name="chat_username">02:39 - Username</string>
+    <string name="chat_other_username">Username - 02:39</string>
     <string name="chat_message">message</string>
     <string name="type_a_message">Type a message</string>
     <string name="back_button">Back</string>

@@ -51,11 +51,11 @@ public class UserListFragment extends Fragment {
         rv = view.findViewById(R.id.admin_userList);
         base = FirebaseDatabase.getInstance().getReference();
 
-        ComponentActivity parent = new ComponentActivity();
-
-        adapter = new UserAdapter(parent);
+        adapter = new UserAdapter(getActivity(), context);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(context));
+        //Not a good way to fix exception but um
+//        rv.setLayoutManager(new WrapContentLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         return view;
     }
 }
