@@ -51,12 +51,16 @@ public class ChatBoxActivity extends AppCompatActivity {
         rv.setLayoutManager(new NoAnimationLinearLayoutManager(this));
 
         send.setOnClickListener(v -> {
+            String messageText = messageSend.getText().toString().trim();
+            if (messageText.isEmpty())
+                return;
+
             if (UserHelper.getAuthUser().getRole() == UserRole.USER) {
-                Message message = new Message(messageSend.getText().toString(),false);
+                Message message = new Message(messageText, false);
                 FirebaseDb.getInstance().messageDao().sendMessage(UserHelper.getAuthUser().getId(), message);
                 messageSend.setText("");
             } else {
-                Message message = new Message(messageSend.getText().toString(),true);
+                Message message = new Message(messageText, true);
                 Intent intent = getIntent();
                 int user_id = intent.getIntExtra("user_id", 2);
                 FirebaseDb.getInstance().messageDao().sendMessage(user_id, message);
