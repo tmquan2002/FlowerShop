@@ -18,6 +18,7 @@ import com.example.flowershop.model.Order;
 import com.example.flowershop.model.OrderStatus;
 
 import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -63,6 +64,7 @@ public class ManageOrderAdapter extends RecyclerView.Adapter<ManageOrderAdapter.
                 orderEdit.setStatus(OrderStatus.DELIVERING);
             } else if (order.getStatus() == OrderStatus.DELIVERING) {
                 orderEdit.setStatus(OrderStatus.DELIVERED);
+                orderEdit.setOrderDate(new Date());
             }
             mDisposable.add(FlowerDatabase.getInstance(context).orderDao().update(orderEdit)
                     .subscribeOn(Schedulers.io())
