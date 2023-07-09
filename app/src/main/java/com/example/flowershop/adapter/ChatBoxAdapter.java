@@ -44,7 +44,6 @@ public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdap
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Message model) {
-        // TODO: @tmquan2002 set data
         mDisposable.add(FlowerDatabase.getInstance(context).userDao().getById(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,8 +79,6 @@ public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // TODO: @tmquan2002 inflate message view
-
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_chat, parent, false);
 
@@ -96,7 +93,6 @@ public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-            // TODO: @tmquan2002 find view by id
             username_time_self = itemView.findViewById(R.id.username_time_self);
             message_self = itemView.findViewById(R.id.message_self);
             username_time_other = itemView.findViewById(R.id.username_time_other);
