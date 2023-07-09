@@ -29,6 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.main.ChatBoxActivity"
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".activity.account.SignupActivity"

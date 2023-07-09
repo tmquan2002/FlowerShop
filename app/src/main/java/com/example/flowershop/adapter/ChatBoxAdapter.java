@@ -29,7 +29,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdapter.ViewHolder> {
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     private final Context context;
-    private int userId;
+    private final int userId;
 
     public ChatBoxAdapter(LifecycleOwner parent, Context context, int userId) {
         super(new FirebaseRecyclerOptions
@@ -50,7 +50,7 @@ public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdap
                 .subscribe((user) -> {
                             if (UserHelper.getAuthUser().getRole() == UserRole.USER) {
                                 if (model.isAdmin()) {
-                                    holder.username_time_other.setText(String.format("%s - %s", Formatter.time(model.getTimestamp()), "admin"));
+                                    holder.username_time_other.setText(String.format("%s - %s", "admin", Formatter.time(model.getTimestamp())));
                                     holder.message_other.setText(model.getContent());
                                     holder.linear_self.setVisibility(View.GONE);
                                 } else {
@@ -65,20 +65,19 @@ public class ChatBoxAdapter extends FirebaseRecyclerAdapter<Message, ChatBoxAdap
                                     holder.message_self.setText(model.getContent());
                                     holder.linear_other.setVisibility(View.GONE);
                                 } else {
-                                    holder.username_time_other.setText(String.format("%s - %s", Formatter.time(model.getTimestamp()), user.getUsername()));
+                                    holder.username_time_other.setText(String.format("%s - %s", user.getUsername(), Formatter.time(model.getTimestamp())));
                                     holder.message_other.setText(model.getContent());
                                     holder.linear_self.setVisibility(View.GONE);
                                 }
                             }
                         },
                         throwable -> Log.e("GetFailed", "getById: Cannot get the user", throwable)));
-        holder.itemView.setOnClickListener(v -> {
-        });
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_chat, parent, false);
 

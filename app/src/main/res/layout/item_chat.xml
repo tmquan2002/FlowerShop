@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical"
-        android:paddingLeft="150dp"
+        android:paddingLeft="50dp"
         android:textAlignment="textEnd">
 
         <TextView
@@ -35,10 +35,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@drawable/chat_box_self"
-            android:gravity="end"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:gravity="start"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/chat_message"
+            android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>
@@ -48,11 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical"
-        android:paddingRight="150dp">
+        android:paddingRight="50dp">
 
         <TextView
             android:id="@+id/username_time_other"
@@ -70,8 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/chat_box_other"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/chat_message"
             android:textColor="@color/black"
             android:textSize="18sp" />
